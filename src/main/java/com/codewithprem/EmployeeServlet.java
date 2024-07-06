@@ -1,9 +1,6 @@
 package com.codewithprem;
 
-import com.google.gson.Gson;
-
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -13,27 +10,100 @@ import java.util.List;
 //@WebServlet(name = "employeeServlet", value = "/employees")
 public class EmployeeServlet extends HttpServlet {
     private EmployeeDAO employeeDAO;
-    private Gson gson;
 
     @Override
     public void init() {
         employeeDAO = new EmployeeDAO();
-        gson = new Gson();
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setContentType("application/json");
-        List<Employee> employees = null;
+        resp.setContentType("text/html");
+        List<Employee> employees;
         try {
             employees = employeeDAO.getAllEmployees();
+            PrintWriter out = resp.getWriter();
+            for (Employee employee : employees) {
+                out.println("ID: " + employee.getId() + ", Name: " + employee.getName() + ", Position: " + employee.getPosition() + ", Salary: " + employee.getSalary());
+            }
+            out.flush();
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
+            resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            resp.getWriter().print("Internal server error");
         }
-        
-        String employeeJsonString =  gson.toJson(employees);
-        PrintWriter out = resp.getWriter();
-        out.print(employeeJsonString);
-        out.flush();
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.setContentType("text/html");
+
+        String name = req.getParameter("name");
+        String position = req.getParameter("position");
+        String salaryStr = req.getParameter("salary");
+
+        if (name.isEmpty() || position.isEmpty() || salaryStr.isEmpty()) {
+            resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            resp.getWriter().print("All fields are required: name, position, and salary.");
+            return;
+        }
+
+        try {
+            double salary = Double.parseDouble(salaryStr);
+
+            Employee employee = new Employee();
+            employee.setName(name);
+            employee.setPosition(position);
+            employee.setSalary(salary);
+
+            employeeDAO.addEmployee(employee);
+            PrintWriter out = resp.getWriter();
+            out.print("Employee added successfully");
+
+        } catch (NumberFormatException e) {
+            resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            resp.getWriter().print("Invalid salary format. Salary must be a number.");
+        } catch (SQLException | ClassNotFoundException e) {
+            resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            resp.getWriter().print("Error adding employee");
+        }
+    }
+
+    @Override
+    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.setContentType("text/html");
+
+        String name = req.getParameter("name");
+        String position = req.getParameter("position");
+        String salaryStr = req.getParameter("salary");
+        int id = Integer.parseInt(req.getParameter("id"));
+
+        if (name.isEmpty() || position.isEmpty() || salaryStr.isEmpty()) {
+            resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            resp.getWriter().print("All fields are required: name, position, and salary.");
+            return;
+        }
+
+        try {
+            double salary = Double.parseDouble(salaryStr);
+
+            Employee employee = new Employee();
+            employee.setId(id);
+            employee.setName(name);
+            employee.setPosition(position);
+            employee.setSalary(salary);
+
+            employeeDAO.updateEmployee(employee);
+            PrintWriter out = resp.getWriter();
+            out.print("Employee updated successfully");
+
+        } catch (NumberFormatException e) {
+            resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            resp.getWriter().print("Invalid salary format. Salary must be a number.");
+        } catch (SQLException | ClassNotFoundException e) {
+            resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            resp.getWriter().print("Error updating employee");
+        }
+
     }
 }

@@ -12,6 +12,7 @@ public class EmployeeDAO {
         preparedStatement.setString(1, employee.getName());
         preparedStatement.setString(2, employee.getPosition());
         preparedStatement.setDouble(3, employee.getSalary());
+        preparedStatement.executeUpdate();
         conn.close();
     }
 
@@ -34,4 +35,27 @@ public class EmployeeDAO {
         conn.close();
         return employeeList;
     }
+
+
+    public void updateEmployee(Employee employee) throws SQLException, ClassNotFoundException {
+        Connection conn = DatabaseUtil.getConnection();
+        String sql = "UPDATE employee SET name=?, position=?, salary=? WHERE id=?";
+        PreparedStatement preparedStatement = conn.prepareStatement(sql);
+        preparedStatement.setString(1, employee.getName());
+        preparedStatement.setString(2, employee.getPosition());
+        preparedStatement.setDouble(3, employee.getSalary());
+        preparedStatement.setInt(4, employee.getId());
+        preparedStatement.executeUpdate();
+        conn.close();
+    }
+
+    public void deleteEmployee(int employeeId) throws SQLException, ClassNotFoundException {
+        Connection conn = DatabaseUtil.getConnection();
+        String sql = "DELETE FROM employee WHERE id=?";
+        PreparedStatement preparedStatement = conn.prepareStatement(sql);
+        preparedStatement.setInt(1, employeeId);
+        preparedStatement.executeUpdate();
+        conn.close();
+    }
+
 }
