@@ -12,5 +12,23 @@
         <servlet-name>EmployeeServlet</servlet-name>
         <url-pattern>/employees</url-pattern>
     </servlet-mapping>
-    
+
+    <servlet>
+        <servlet-name>EmployeeListServlet</servlet-name>
+        <servlet-class>com.codewithprem.EmployeeListServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>EmployeeListServlet</servlet-name>
+        <url-pattern>/list</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>AddEmployeeServlet</servlet-name>
+        <servlet-class>com.codewithprem.AddEmployeeServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AddEmployeeServlet</servlet-name>
+        <url-pattern>/addEmployee</url-pattern>
+    </servlet-mapping>
+
 </web-app>
