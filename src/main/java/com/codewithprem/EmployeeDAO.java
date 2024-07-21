@@ -21,7 +21,7 @@ public class EmployeeDAO {
 
         Connection conn = DatabaseUtil.getConnection();
         String sql = "SELECT * FROM employee";
-        java.sql.Statement statement = conn.createStatement();
+        Statement statement = conn.createStatement();
         ResultSet resultSet = statement.executeQuery(sql);
 
         while (resultSet.next()) {
@@ -34,6 +34,25 @@ public class EmployeeDAO {
         }
         conn.close();
         return employeeList;
+    }
+
+    public Employee getEmployeeById(int id) throws SQLException, ClassNotFoundException {
+        Connection conn = DatabaseUtil.getConnection();
+        String sql = "SELECT * FROM employee WHERE id=?";
+        PreparedStatement preparedStatement = conn.prepareStatement(sql);
+        preparedStatement.setInt(1, id);
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        Employee employee = null;
+        if (resultSet.next()) {
+            employee = new Employee();
+            employee.setId(resultSet.getInt("id"));
+            employee.setName(resultSet.getString("name"));
+            employee.setPosition(resultSet.getString("position"));
+            employee.setSalary(resultSet.getDouble("salary"));
+        }
+        conn.close();
+        return employee;
     }
 
 

@@ -5,6 +5,16 @@
     <title>Add New Employee</title>
 </head>
 <body>
+
+<center>
+    <h1>Employee Management</h1>
+    <h2>
+        <a href="AddEmployee.jsp"> Add New Employee </a>
+        &nbsp;&nbsp;&nbsp;
+        <a href="list"> List All Employees </a>
+    </h2>
+</center>
+
 <center>
     <h1>Add New Employee</h1>
     <form action="addEmployee" method="post">

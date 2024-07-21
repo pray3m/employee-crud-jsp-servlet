@@ -31,4 +31,13 @@
         <url-pattern>/addEmployee</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>EditEmployeeServlet</servlet-name>
+        <servlet-class>com.codewithprem.EditEmployeeServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>EditEmployeeServlet</servlet-name>
+        <url-pattern>/editEmployee</url-pattern>
+    </servlet-mapping>
+
 </web-app>

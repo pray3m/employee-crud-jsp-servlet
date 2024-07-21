@@ -41,11 +41,10 @@
             <td><%= employee.getSalary() %>
             </td>
             <td>
-                <a href="editEmployee">Edit</a>
+                <a href="editEmployee?id=<%= employee.getId() %>">Edit</a>
                 <a href="deleteEmployee"> Delete</a>
             </td>
         </tr>
-
         <%
             }
         } else {
