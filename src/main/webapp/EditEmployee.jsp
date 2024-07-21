@@ -13,11 +13,11 @@
 
 <center>
     <h1>Employee Management</h1>
-    <h2>
+    <h3>
         <a href="AddEmployee.jsp"> Add New Employee </a>
         &nbsp;&nbsp;&nbsp;
         <a href="list"> List All Employees </a>
-    </h2>
+    </h3>
 </center>
 
 <center>

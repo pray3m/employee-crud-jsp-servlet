@@ -24,7 +24,7 @@ public class EditEmployeeServlet extends HttpServlet {
             req.setAttribute("employee", employee);
             req.getRequestDispatcher("EditEmployee.jsp").forward(req, resp);
         } catch (SQLException | ClassNotFoundException e) {
-            throw new RuntimeException(e);
+            throw new ServletException(e);
         }
 
     }
@@ -45,7 +45,7 @@ public class EditEmployeeServlet extends HttpServlet {
             employeeDAO.updateEmployee(employee);
             resp.sendRedirect("list");
         } catch (SQLException | ClassNotFoundException e) {
-            throw new RuntimeException(e);
+            throw new ServletException(e);
         }
     }
 }

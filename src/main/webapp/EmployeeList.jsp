@@ -9,11 +9,11 @@
 <body>
 <center>
     <h1>Employee Management</h1>
-    <h2>
+    <h3>
         <a href="AddEmployee.jsp"> Add New Employee </a>
         &nbsp;&nbsp;&nbsp;
         <a href="list"> List All Employees </a>
-    </h2>
+    </h3>
 </center>
 
 <div align="center">
@@ -41,8 +41,12 @@
             <td><%= employee.getSalary() %>
             </td>
             <td>
-                <a href="editEmployee?id=<%= employee.getId() %>">Edit</a>
-                <a href="deleteEmployee"> Delete</a>
+                <a href="editEmployee?id=<%= employee.getId() %>">
+                    <button>Edit</button>
+                </a>
+                <a href="deleteEmployee">
+                    <button>Delete</button>
+                </a>
             </td>
         </tr>
         <%
