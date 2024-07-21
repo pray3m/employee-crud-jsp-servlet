@@ -6,7 +6,7 @@
 
     <servlet>
         <servlet-name>EmployeeServlet</servlet-name>
-        <servlet-class>com.codewithprem.EmployeeServlet</servlet-class>
+        <servlet-class>com.codewithprem.EmployeeAPIServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>EmployeeServlet</servlet-name>

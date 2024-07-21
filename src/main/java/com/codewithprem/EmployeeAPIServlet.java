@@ -10,7 +10,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 //@WebServlet(name = "employeeServlet", value = "/employees")
-public class EmployeeServlet extends HttpServlet {
+public class EmployeeAPIServlet extends HttpServlet {
     private EmployeeDAO employeeDAO;
 
     @Override
