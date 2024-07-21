@@ -40,4 +40,13 @@
         <url-pattern>/editEmployee</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>DeleteEmployeeServlet</servlet-name>
+        <servlet-class>com.codewithprem.DeleteEmployeeServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DeleteEmployeeServlet</servlet-name>
+        <url-pattern>/deleteEmployee</url-pattern>
+    </servlet-mapping>
+
 </web-app>

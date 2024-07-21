@@ -44,7 +44,7 @@
                 <a href="editEmployee?id=<%= employee.getId() %>">
                     <button>Edit</button>
                 </a>
-                <a href="deleteEmployee">
+                <a href="deleteEmployee?id=<%= employee.getId()%>">
                     <button>Delete</button>
                 </a>
             </td>
